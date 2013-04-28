@@ -1,0 +1,8 @@
+{
+  "name": "Preprocessors slides",
+  "dependencies": {
+    "reveal.js": "latest",
+    "highlightjs": "latest",
+    "jquery": "latest"
+  }
+}

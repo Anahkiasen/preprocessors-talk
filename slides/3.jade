@@ -1,0 +1,352 @@
+section
+	h2 Sass
+
+section
+	h3 Nesting
+	div.row-fluid
+		pre.span6
+			code.sass.
+				body {
+					section {
+						header {
+							// ...
+						}
+					}
+
+					aside {
+						// ...
+					}
+				}
+		pre.span6
+			code.sass.
+				body {}
+				body section {}
+				body section header {}
+				body aside {}
+
+section
+	h3 Variables
+	div.row-fluid
+		pre.span6
+			code.sass.
+				$light-red: rgba(255, 0, 0);
+
+				body {
+					background-color: darken($light-red, 25);
+				}
+		pre.span6
+			code.sass.
+				body {
+					background-color: #1F3ED4;
+				}
+
+section
+	h3 Boucles et conditions
+	div.row-fluid
+		pre.span6
+			code.sass.
+				$columns: 12;
+				$width: 2rem;
+
+				@for $i from 1 through $columns {
+					.span-\#{$i} {
+						width: $width * $i;
+					}
+				}
+		pre.span6
+			code.sass.
+				.span1 {
+					width: 2rem;
+				}
+
+				.span2 {
+					width: 4rem;
+				}
+
+				// ...
+
+section
+	h3 Listes
+	div.row-fluid
+		pre.span6
+			code.sass.
+				$networks: facebook, twitter, pinterest
+				@each $network in $networks {
+					.btn-\#{$network} {
+						background-color: $color-{$network};
+					}
+				}
+		pre.span6
+			code.sass.
+				.btn-facebook {
+					background-color: #2G9D2E;
+				}
+
+				.btn-twitter {
+					background-color: #D2E5DE;
+				}
+
+				// ...
+
+section
+	h3 Fonctions et mixins
+	div.row-fluid
+		pre.span6
+			code.sass.
+				@function grey($lightness) {
+					@return lighten(black, $lightness);
+				}
+
+				@mixin button($color) {
+					background-color: $color;
+					&:hover {
+						background-color: darken($color, .10);
+					}
+				}
+
+				.btn {
+					@include button(grey(20));
+				}
+		pre.span6
+			code.sass.
+				.btn {
+					background-color: hsl(0, 0, 20);
+				}
+
+				.btn:hover {
+					background-color: hsl(0, 0, 10);
+				}
+
+section
+	h3 Partials
+	div.row-fluid
+		div.span6
+			h5 _media.scss
+			pre
+				code.sass.
+					.media {
+						background-color: red;
+					}
+
+			h5 styles.scss
+			pre
+				code.sass.
+					body {
+						@import "media";
+					}
+
+					// ...
+		div.span6
+			h5 styles.css
+			pre
+				code.sass.
+					body .media {
+						background-color: red;
+					}
+
+section
+	h3 Inhéritance
+	div.row-fluid
+		pre.span6
+			code.sass.
+				.btn {
+					background: red;
+					&:hover { background: blue }
+				}
+
+				%faded-out {
+					opacity: 0.5;
+				}
+
+				.btn-faded {
+					@extend .btn;
+					@extend %faded-out;
+					background: grey;
+				}
+		pre.span6
+			code.sass.
+				.btn, .btn-faded {
+					background: red;
+				}
+
+				.btn:hover, .btn-faded:hover {
+					background: blue;
+				}
+
+				.btn-faded {
+					opacity: 0.5;
+				}
+
+				.btn-faded {
+					background: grey;
+				}
+
+section
+	h2 Compass
+	h4 Le jQuery de Sass
+
+section
+	h3 Préfixes et hacks
+	div.row-fluid
+		div.span6
+			pre
+				code.sass.
+					body {
+						@include clearfix;
+						@include background-image(
+							radial-gradient(
+								45px 45px, cyan 10px,
+								dodgerblue 30px
+						));
+					}
+		div.span6
+			pre
+				code.sass.
+					body {
+						overflow: hidden;
+						*zoom: 1
+						background-image: -webkit-gradient(radial, 45px 45px, 0, 45px 45px, 30, color-stop(33.333%, #00ffff), color-stop(100%, #1e90ff));
+						background-image: -webkit-radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+						background-image: -moz-radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+						background-image: -o-radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+						background-image: -ms-radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+						background-image: radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+					}
+
+section
+	h3 Uniformisation des modules
+	div.row-fluid
+		div.span6
+			pre
+				code.sass.
+					.example {
+						@include display-box;
+						@include box-orient(horizontal);
+						@include box-align(stretch);
+						@include box-direction(reverse);
+						height: 200px;
+						width: 100%;
+
+						.content, .sidebar {
+							padding: 20px;
+						}
+
+						.content {
+							@include box-flex(4);
+							background-color: #c5c1b4;
+						}
+
+						.sidebar {
+							@include box-flex(1);
+							background-color: #375f99;
+							margin-right: 1px;
+						}
+		div.span6
+			pre
+				code.sass.
+					.example {
+						display: -webkit-box;
+						display: -moz-box;
+						display: -ms-box;
+						display: box;
+						-webkit-box-orient: horizontal;
+						-moz-box-orient: horizontal;
+						-ms-box-orient: horizontal;
+						box-orient: horizontal;
+						-webkit-box-align: stretch;
+						-moz-box-align: stretch;
+						-ms-box-align: stretch;
+						box-align: stretch;
+						-webkit-box-direction: reverse;
+						-moz-box-direction: reverse;
+						-ms-box-direction: reverse;
+						box-direction: reverse;
+						height: 200px;
+						width: 100%;
+					}
+					.example .content, .example .sidebar {
+						padding: 20px;
+					}
+					.example .content {
+						-webkit-box-flex: 4;
+						-moz-box-flex: 4;
+						-ms-box-flex: 4;
+						box-flex: 4;
+						background-color: #c5c1b4;
+					}
+					.example .sidebar {
+						-webkit-box-flex: 1;
+						-moz-box-flex: 1;
+						-ms-box-flex: 1;
+						box-flex: 1;
+						background-color: #375f99;
+						margin-right: 1px;
+					}
+
+section
+	h3 Sprites
+	div.row-fluid
+		div.span6
+			pre
+				code.sass.
+					@import "my-icons/*.png";
+					@include all-my-icons-sprites;
+		div.span6
+			pre
+				code.sass.
+					.my-icons-sprite,
+					.my-icons-delete,
+					.my-icons-edit,
+					.my-icons-new,
+					.my-icons-save   { background: url('/images/my-icons-s34fe0604ab.png') no-repeat; }
+
+					.my-icons-delete { background-position: 0 0; }
+					.my-icons-edit   { background-position: 0 -32px; }
+					.my-icons-new    { background-position: 0 -64px; }
+					.my-icons-save   { background-position: 0 -96px; }
+
+section
+	h3 Rythme vertical
+	div.row-fluid
+		div.span6
+			pre
+				code.sass.
+					@include establish-baseline(16px);
+
+					h1 {
+						@include rhythm(3, 1, 0, 2, 42px);
+					}
+
+					blockquote {
+						@include leading-border(2px, .5);
+						@include trailing-border(2px, .5);
+					}
+		div.span6
+			pre
+				code.sass.
+					html {
+						font-size: 100%;
+						line-height: 1.5em;
+					}
+
+					h1 {
+						margin-top: 1.71429em;
+						padding-top: 0.57143em;
+						padding-bottom: 0em;
+						margin-bottom: 1.14286em;
+					}
+
+					blockquote {
+						border-top-width: 0.125em;
+						border-top-style: solid;
+						padding-top: 0.625em;
+						border-bottom-width: 0.125em;
+						border-bottom-style: solid;
+						padding-bottom: 0.625em;
+					}
+
+section
+	blockquote.
+		Si quelque chose est long, répetitif, inélégant ou juste chiant à faire,<br>
+		Compass saura le faire en quelques lignes
+

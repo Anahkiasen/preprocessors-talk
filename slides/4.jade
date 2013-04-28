@@ -1,0 +1,99 @@
+section
+  h3 Les grilles
+  p
+    :markdown
+      Pour palier au manque de solutions de *mise en page* en CSS, un problème qui dure
+      depuis son existence, ont été inventées les grilles. Une manière de découper
+      une page en lignes et colonnes.
+  mixin image('grill.jpg')
+
+section
+  h4 Les grilles du <strong>New York Times</strong>
+  mixin image('grid.png')
+
+section
+  h3 Via un framework CSS
+  pre
+    code.html.
+      &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;span9&quot;&gt;
+          Level 1 column
+          &lt;div class=&quot;row&quot;&gt;
+            &lt;div class=&quot;span6&quot;&gt;Level 2&lt;/div&gt;
+            &lt;div class=&quot;span2 offset1&quot;&gt;Level 2&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+section
+  h3 Via Susy, un plugin Sass
+  h5 Configuration rapide
+  pre
+    code.sass.
+      @import "susy";
+
+      // Number of columns
+      $total-columns: 5;
+
+      // Width of each column
+      $column-width : 4em;
+
+      // Space between columns
+      $gutter-width : 1em;
+
+      // Layout sizes
+      $tablet: 8;
+      $computer: 55em 12;
+
+section
+  div.row-fluid
+    div.span6
+      pre
+        code.sass.
+          @include at-breakpoint($computer) {
+            body .container {
+              #controls {
+                #title {
+                  @include span-columns(5);
+                }
+                #buttons {
+                  @include span-columns(5 omega);
+                }
+              }
+              table {
+                @include prefix(1);
+                @include suffix(1);
+              }
+            }
+          }
+
+          @include at-breakpoint($tablet) {
+            body .container {
+              @include span-columns(3);
+            }
+          }
+    div.span6
+      pre
+        code.sass.
+          @media (min-width: 55em) {
+            body .container #controls #title {
+              width: 40.67797%;
+              float: left;
+              margin-right: 1.69492%;
+            }
+            body .container #controls #buttons {
+              width: 40.67797%;
+              float: right;
+              margin-right: 0;
+            }
+            body .container table {
+              padding-left: 8.47458%;
+              padding-right: 8.47458%;
+            }
+          }
+
+          @media (min-width: 39em) {
+            body .container #header span {
+              display: inline;
+            }
+          }

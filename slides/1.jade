@@ -1,0 +1,94 @@
+section
+  p.
+    Les préprocesseurs sont des surcouches qui rajoutent des fonctionnalités programmatiques ou syntaxiques
+    à un langage. Ils en corrigent les défauts et expriment le désir des développeurs face aux évolutions du langage.
+  p.
+    Par exemple les variables, initialement introduites par les préprocesseurs CSS, sont maintenant
+    considérées comme prochain ajout.
+  h3
+    | CSS<br>
+    small Sass, Stylus, Less
+  h3
+    | Javascript<br>
+    small CoffeeScript, Dart, Typescript
+  h3
+    | HTML<br>
+    small Jade, HAML, Slim
+
+section.text-left
+  h2 Les préprocesseurs CSS
+  div.fragment
+    h3
+      | Less <small>Javascript</small>
+    p.
+      Existe depuis 2009, écrit en Javascript, tente de conserver la philosophie déclarative du CSS (pas de conditions etc.)<br>
+  div.fragment
+    h3
+      | Stylus <small>Javascript</small>
+    p.
+      Existe depuis 2011.<br>
+      Relativement puissant, mais sacrifie lisibilité au profit de tours de magie syntaxiques
+  div.fragment
+    h3
+      | Sass <small>Ruby</small>
+    p.
+      Existe depuis 2006, le plus puissant des trois, écrit en Ruby.<br>
+      Est un accompagné d'un framework extrêmement complet : <strong>Compass</strong>
+
+section(data-transition='zoom')
+  h2 Less
+  pre
+    code.sass.
+      @base: #f938ab;
+
+      .box-shadow(@style, @c) when (iscolor(@c)) {
+        box-shadow:         @style @c;
+        -webkit-box-shadow: @style @c;
+        -moz-box-shadow:    @style @c;
+      }
+      .box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
+        .box-shadow(@style, rgba(0, 0, 0, @alpha));
+      }
+
+      .box {
+        color: saturate(@base, 5%);
+        border-color: lighten(@base, 30%);
+        div { .box-shadow(0 0 5px, 30%) }
+      }
+
+section(data-transition='zoom')
+  h2 Stylus
+  pre
+    code.sass.
+      border-radius()
+        -webkit-border-radius arguments
+        -moz-border-radius arguments
+        border-radius arguments
+
+      body
+        font 12px Helvetica, Arial, sans-serif
+
+      a.button
+        border-radius 5px
+
+section(data-transition='zoom')
+  h2 Sass
+  pre
+    code.sass.
+      @mixin table-base {
+        th {
+          text-align: center;
+          font-weight: bold;
+        }
+        td, th {padding: 2px}
+      }
+
+      @mixin left($dist) {
+        float: left;
+        margin-left: $dist;
+      }
+
+      #data {
+        @include left(10px);
+        @include table-base;
+      }

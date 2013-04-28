@@ -1,0 +1,71 @@
+
+@import "solarized";
+@import "compass";
+
+.reveal {
+  h2 {
+    color: $orange;
+  }
+  h3 {
+    color: $cyan;
+  }
+
+  p {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-align: left;
+    color: $base1;
+  }
+
+  em {
+    color: $orange;
+  }
+
+  strong {
+    color: $violet;
+  }
+
+  p > code {
+    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0px 4px;
+    color: #d14;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    white-space: nowrap;
+  }
+
+  blockquote {
+    text-align: left;
+    margin: 1rem auto 2rem;
+    width: 75%;
+    background: $base2;
+    border: none;
+    box-shadow: none;
+    border-left: .5rem solid $orange;
+    padding: 2rem 2rem 2rem 3rem;
+  }
+
+  pre {
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  pre code {
+    @include box-sizing(border-box);
+    padding: 2rem 0;
+    max-height: 29rem;
+    padding-left: 9rem;
+    &.small {
+      font-size: 0.75rem;
+    }
+  }
+  pre.span4 code,
+  div.span4 > pre code,
+  pre.span6 code,
+  div.span6 > pre code {
+    padding-left: 2rem;
+  }
+}

@@ -1,0 +1,94 @@
+section
+  h2 Définitions
+  div.fragment
+    h3.
+      Sass <small>Syntactically Awesome Stylesheets</small>
+    p.
+      Est le nom du langage lui-même. C'est aussi le nom donné à l'ancienne
+      syntaxe du langage qui peut encore aujourd'hui être utilisée. Cette syntaxe
+      est dérivée du Ruby et est donc basée sur l'indentation.
+  div.fragment
+    h3.
+      Scss <small>Sassy CSS</small>
+    p.
+      Est le nom de la "nouvelle" syntaxe, basée sur le CSS. Toute feuille de CSS est
+      ainsi par défaut une feuille de SCSS aussi.
+  div.fragment
+    h3.
+      Compass
+    p(data-markdown).
+      Est un framework/extension à **Sass**, il rajoute des centaines de fonctions,
+      mixins et outils permettant de prémâcher une grande partie du travail.
+
+      C'est un peu le _jQuery_ de Sass et CSS.
+
+section(data-transition='zoom')
+  h3 This is your brain on Sass
+  pre
+    code.sass.
+      =table-base
+        th
+          text-align: center
+          font-weight: bold
+        td, th
+          padding: 2px
+
+      =left($dist)
+        float: left
+        margin-left: $dist
+
+      #data
+        +left(10px)
+        +table-base
+
+section(data-transition='zoom')
+  h3 This is your brain on Scss
+  pre
+    code.sass.
+      @mixin table-base {
+        th {
+          text-align: center;
+          font-weight: bold;
+        }
+        td, th {padding: 2px}
+      }
+
+      @mixin left($dist) {
+        float: left;
+        margin-left: $dist;
+      }
+
+      #data {
+        @include left(10px);
+        @include table-base;
+      }
+
+section(data-transition='zoom')
+  h3 This is your brain on Compass
+  pre
+    code.sass.
+      @import "compass";
+      @import "compass/layout/sticky-footer";
+
+      // Precreated mixing
+      @include font-face("Lobster", font-files("Lobster.ttf", "Lobster.otf"));
+      @include sticky-footer(50px, "#body", "#footer");
+
+      // Sprites
+      @import "design/*.png";
+
+      #body {
+        $mainColor: lighten(black, 10);
+        @include design-sprite("dashboard");
+        #navigation {
+          @include background(linear-gradient(top, color-stops($mainColor, darken($mainColor, 5))));
+          @include text-shadow(fade(black, 20));
+          @include box-shadow(5px 5px 0 fade(black, 10));
+          a {
+            @include hover-link;
+            @include transition(all 0.3s);
+            hover: {
+              background: whitesmoke;
+            };
+          }
+        }

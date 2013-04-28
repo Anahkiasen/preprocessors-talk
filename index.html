@@ -1,0 +1,488 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Preprocessors</title><link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"><link rel="stylesheet" href="components/reveal.js/css/reveal.min.css"><link rel="stylesheet" href="components/highlightjs/styles/tomorrow-night-eighties.css"><link rel="stylesheet" href="components/reveal.js/css/theme/solarized.css"><link rel="stylesheet" href="app/css/main.css"></head><body><div class="reveal"><div class="slides container-fluid"><section data-transition="linear"><section><h1>Sass, Compass<br> et nouvelles<br> méthodologies CSS</h1></section><section><h3>Le CSS</h3><ul><li class="fragment">Est le plus récent de la trinité "HTML/CSS/JS"
+</li><li class="fragment">Est le plus lent à évoluer du fait de mésententes entre les différents
+navigateurs
+</li><li class="fragment">Est un langage purement déclaratif (sur un seul niveau)
+</li></ul></section><section><blockquote>Tous les ajouts de ces dernières années au CSS se résument à des ajouts
+en terme de possibilités <em>visuelles</em> (ombres, dégradés, filtres, etc.)
+alors qu'une grosse partie du problème se situe dans la syntaxe
+du langage et ses limitations</blockquote><p data-markdown>Similairement au PHP, le CSS crée à l'origine pour des styles basiques
+est devenu bien trop simpliste comparé aux exigences et besoins des sites
+énormes crées à l'heure actuelle.</p></section></section><section><section><h4>Entrent alors en jeu</h4><h2>Les préprocesseurs front-end</h2><h4>Dum dum dum</h4></section><section><p>Les préprocesseurs sont des surcouches qui rajoutent des fonctionnalités programmatiques ou syntaxiques
+à un langage. Ils en corrigent les défauts et expriment le désir des développeurs face aux évolutions du langage.</p><p>Par exemple les variables, initialement introduites par les préprocesseurs CSS, sont maintenant
+considérées comme prochain ajout.</p><h3>CSS<br><small>Sass, Stylus, Less</small></h3><h3>Javascript<br><small>CoffeeScript, Dart, Typescript</small></h3><h3>HTML<br><small>Jade, HAML, Slim</small></h3></section><section class="text-left"><h2>Les préprocesseurs CSS</h2><div class="fragment"><h3>Less <small>Javascript</small></h3><p>Existe depuis 2009, écrit en Javascript, tente de conserver la philosophie déclarative du CSS (pas de conditions etc.)<br></p></div><div class="fragment"><h3>Stylus <small>Javascript</small></h3><p>Existe depuis 2011.<br>
+Relativement puissant, mais sacrifie lisibilité au profit de tours de magie syntaxiques</p></div><div class="fragment"><h3>Sass <small>Ruby</small></h3><p>Existe depuis 2006, le plus puissant des trois, écrit en Ruby.<br>
+Est un accompagné d'un framework extrêmement complet : <strong>Compass</strong>
+</p></div></section><section data-transition="zoom"><h2>Less</h2><pre><code class="sass">@base: #f938ab;
+
+.box-shadow(@style, @c) when (iscolor(@c)) {
+  box-shadow:         @style @c;
+  -webkit-box-shadow: @style @c;
+  -moz-box-shadow:    @style @c;
+}
+.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
+  .box-shadow(@style, rgba(0, 0, 0, @alpha));
+}
+
+.box {
+  color: saturate(@base, 5%);
+  border-color: lighten(@base, 30%);
+  div { .box-shadow(0 0 5px, 30%) }
+}
+</code></pre></section><section data-transition="zoom"><h2>Stylus</h2><pre><code class="sass">border-radius()
+  -webkit-border-radius arguments
+  -moz-border-radius arguments
+  border-radius arguments
+  
+body
+  font 12px Helvetica, Arial, sans-serif
+  
+a.button
+  border-radius 5px
+  </code></pre></section><section data-transition="zoom"><h2>Sass</h2><pre><code class="sass">@mixin table-base {
+  th {
+    text-align: center;
+    font-weight: bold;
+  }
+  td, th {padding: 2px}
+}
+
+@mixin left($dist) {
+  float: left;
+  margin-left: $dist;
+}
+
+#data {
+  @include left(10px);
+  @include table-base;
+}</code></pre></section></section><section><section><h3>Sass et Compass</h3></section><section><h2>Définitions</h2><div class="fragment"><h3>Sass <small>Syntactically Awesome Stylesheets</small></h3><p>Est le nom du langage lui-même. C'est aussi le nom donné à l'ancienne
+syntaxe du langage qui peut encore aujourd'hui être utilisée. Cette syntaxe
+est dérivée du Ruby et est donc basée sur l'indentation.</p></div><div class="fragment"><h3>Scss <small>Sassy CSS</small></h3><p>Est le nom de la "nouvelle" syntaxe, basée sur le CSS. Toute feuille de CSS est
+ainsi par défaut une feuille de SCSS aussi.</p></div><div class="fragment"><h3>Compass</h3><p data-markdown>Est un framework/extension à **Sass**, il rajoute des centaines de fonctions,
+mixins et outils permettant de prémâcher une grande partie du travail.
+
+C'est un peu le _jQuery_ de Sass et CSS.
+</p></div></section><section data-transition="zoom"><h3>This is your brain on Sass</h3><pre><code class="sass">=table-base
+  th
+    text-align: center
+    font-weight: bold
+  td, th
+    padding: 2px
+    
+=left($dist)
+  float: left
+  margin-left: $dist
+  
+#data
+  +left(10px)
+  +table-base
+  </code></pre></section><section data-transition="zoom"><h3>This is your brain on Scss</h3><pre><code class="sass">@mixin table-base {
+  th {
+    text-align: center;
+    font-weight: bold;
+  }
+  td, th {padding: 2px}
+}
+
+@mixin left($dist) {
+  float: left;
+  margin-left: $dist;
+}
+
+#data {
+  @include left(10px);
+  @include table-base;
+}
+</code></pre></section><section data-transition="zoom"><h3>This is your brain on Compass</h3><pre><code class="sass">@import "compass";
+@import "compass/layout/sticky-footer";
+
+// Precreated mixing
+@include font-face("Lobster", font-files("Lobster.ttf", "Lobster.otf"));
+@include sticky-footer(50px, "#body", "#footer");
+
+// Sprites
+@import "design/*.png";
+
+#body {
+  $mainColor: lighten(black, 10);
+  @include design-sprite("dashboard");
+  #navigation {
+    @include background(linear-gradient(top, color-stops($mainColor, darken($mainColor, 5))));
+    @include text-shadow(fade(black, 20));
+    @include box-shadow(5px 5px 0 fade(black, 10));
+    a {
+      @include hover-link;
+      @include transition(all 0.3s);
+      hover: {
+        background: whitesmoke;
+      };
+    }
+  }</code></pre></section></section><section><section><h3>Les capacités de Sass et Compass</h3></section><section><h2>Sass</h2></section><section><h3>Nesting</h3><div class="row-fluid"><pre class="span6"><code class="sass">body {
+ section {
+  header {
+   // ...
+  }
+ }
+ 
+ aside {
+  // ...
+ }
+}</code></pre><pre class="span6"><code class="sass">body {}
+body section {}
+body section header {}
+body aside {}
+</code></pre></div></section><section><h3>Variables</h3><div class="row-fluid"><pre class="span6"><code class="sass">$light-red: rgba(255, 0, 0);
+
+body {
+ background-color: darken($light-red, 25);
+}</code></pre><pre class="span6"><code class="sass">body {
+ background-color: #1F3ED4;
+}
+</code></pre></div></section><section><h3>Boucles et conditions</h3><div class="row-fluid"><pre class="span6"><code class="sass">$columns: 12;
+$width: 2rem;
+
+@for $i from 1 through $columns {
+ .span-#{$i} {
+  width: $width * $i;
+ }
+}</code></pre><pre class="span6"><code class="sass">.span1 {
+ width: 2rem;
+}
+
+.span2 {
+ width: 4rem;
+}
+
+// ...
+</code></pre></div></section><section><h3>Listes</h3><div class="row-fluid"><pre class="span6"><code class="sass">$networks: facebook, twitter, pinterest
+@each $network in $networks {
+ .btn-#{$network} {
+  background-color: $color-{$network};
+ }
+}</code></pre><pre class="span6"><code class="sass">.btn-facebook {
+ background-color: #2G9D2E;
+}
+
+.btn-twitter {
+ background-color: #D2E5DE;
+}
+
+// ...
+</code></pre></div></section><section><h3>Fonctions et mixins</h3><div class="row-fluid"><pre class="span6"><code class="sass">@function grey($lightness) {
+ @return lighten(black, $lightness);
+}
+
+@mixin button($color) {
+ background-color: $color;
+ &:hover {
+  background-color: darken($color, .10);
+ }
+}
+
+.btn {
+ @include button(grey(20));
+}</code></pre><pre class="span6"><code class="sass">.btn {
+ background-color: hsl(0, 0, 20);
+}
+
+.btn:hover {
+ background-color: hsl(0, 0, 10);
+}
+</code></pre></div></section><section><h3>Partials</h3><div class="row-fluid"><div class="span6"><h5>_media.scss</h5><pre><code class="sass">.media {
+ background-color: red;
+}
+</code></pre><h5>styles.scss</h5><pre><code class="sass">body {
+ @import "media";
+}
+
+// ...</code></pre></div><div class="span6"><h5>styles.css</h5><pre><code class="sass">body .media {
+ background-color: red;
+}
+</code></pre></div></div></section><section><h3>Inhéritance</h3><div class="row-fluid"><pre class="span6"><code class="sass">.btn {
+ background: red;
+ &:hover { background: blue }
+}
+
+%faded-out {
+ opacity: 0.5;
+}
+
+.btn-faded {
+ @extend .btn;
+ @extend %faded-out;
+ background: grey;
+}</code></pre><pre class="span6"><code class="sass">.btn, .btn-faded {
+ background: red;
+}
+
+.btn:hover, .btn-faded:hover {
+ background: blue;
+}
+
+.btn-faded {
+ opacity: 0.5;
+}
+
+.btn-faded {
+ background: grey;
+}
+</code></pre></div></section><section><h2>Compass</h2><h4>Le jQuery de Sass</h4></section><section><h3>Préfixes et hacks</h3><div class="row-fluid"><div class="span6"><pre><code class="sass">body {
+ @include clearfix;
+ @include background-image(
+  radial-gradient(
+   45px 45px, cyan 10px,
+   dodgerblue 30px
+ ));
+}</code></pre></div><div class="span6"><pre><code class="sass">body {
+ overflow: hidden;
+ *zoom: 1
+ background-image: -webkit-gradient(radial, 45px 45px, 0, 45px 45px, 30, color-stop(33.333%, #00ffff), color-stop(100%, #1e90ff));
+ background-image: -webkit-radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+ background-image: -moz-radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+ background-image: -o-radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+ background-image: -ms-radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+ background-image: radial-gradient(45px 45px, #00ffff 10px, #1e90ff 30px);
+}
+</code></pre></div></div></section><section><h3>Uniformisation des modules</h3><div class="row-fluid"><div class="span6"><pre><code class="sass">.example {
+ @include display-box;
+ @include box-orient(horizontal);
+ @include box-align(stretch);
+ @include box-direction(reverse);
+ height: 200px;
+ width: 100%;
+ 
+ .content, .sidebar {
+  padding: 20px;
+ }
+ 
+ .content {
+  @include box-flex(4);
+  background-color: #c5c1b4;
+ }
+ 
+ .sidebar {
+  @include box-flex(1);
+  background-color: #375f99;
+  margin-right: 1px;
+ }</code></pre></div><div class="span6"><pre><code class="sass">.example {
+ display: -webkit-box;
+ display: -moz-box;
+ display: -ms-box;
+ display: box;
+ -webkit-box-orient: horizontal;
+ -moz-box-orient: horizontal;
+ -ms-box-orient: horizontal;
+ box-orient: horizontal;
+ -webkit-box-align: stretch;
+ -moz-box-align: stretch;
+ -ms-box-align: stretch;
+ box-align: stretch;
+ -webkit-box-direction: reverse;
+ -moz-box-direction: reverse;
+ -ms-box-direction: reverse;
+ box-direction: reverse;
+ height: 200px;
+ width: 100%;
+}
+.example .content, .example .sidebar {
+ padding: 20px;
+}
+.example .content {
+ -webkit-box-flex: 4;
+ -moz-box-flex: 4;
+ -ms-box-flex: 4;
+ box-flex: 4;
+ background-color: #c5c1b4;
+}
+.example .sidebar {
+ -webkit-box-flex: 1;
+ -moz-box-flex: 1;
+ -ms-box-flex: 1;
+ box-flex: 1;
+ background-color: #375f99;
+ margin-right: 1px;
+}
+</code></pre></div></div></section><section><h3>Sprites</h3><div class="row-fluid"><div class="span6"><pre><code class="sass">@import "my-icons/*.png";
+@include all-my-icons-sprites;</code></pre></div><div class="span6"><pre><code class="sass">.my-icons-sprite,
+.my-icons-delete,
+.my-icons-edit,
+.my-icons-new,
+.my-icons-save   { background: url('/images/my-icons-s34fe0604ab.png') no-repeat; }
+
+.my-icons-delete { background-position: 0 0; }
+.my-icons-edit   { background-position: 0 -32px; }
+.my-icons-new    { background-position: 0 -64px; }
+.my-icons-save   { background-position: 0 -96px; }
+</code></pre></div></div></section><section><h3>Rythme vertical</h3><div class="row-fluid"><div class="span6"><pre><code class="sass">@include establish-baseline(16px);
+
+h1 {
+ @include rhythm(3, 1, 0, 2, 42px);
+}
+
+blockquote {
+ @include leading-border(2px, .5);
+ @include trailing-border(2px, .5);
+}</code></pre></div><div class="span6"><pre><code class="sass">html {
+ font-size: 100%;
+ line-height: 1.5em;
+}
+
+h1 {
+ margin-top: 1.71429em;
+ padding-top: 0.57143em;
+ padding-bottom: 0em;
+ margin-bottom: 1.14286em;
+}
+
+blockquote {
+ border-top-width: 0.125em;
+ border-top-style: solid;
+ padding-top: 0.625em;
+ border-bottom-width: 0.125em;
+ border-bottom-style: solid;
+ padding-bottom: 0.625em;
+}
+</code></pre></div></div></section><section><blockquote>Si quelque chose est long, répetitif, inélégant ou juste chiant à faire,<br>
+Compass saura le faire en quelques lignes
+</blockquote></section></section><section><section><h2>Susy et les grilles</h2></section><section><h3>Les grilles</h3><p><p>Pour palier au manque de solutions de <em>mise en page</em> en CSS, un problème qui dure
+depuis son existence, ont été inventées les grilles. Une manière de découper
+une page en lignes et colonnes.</p></p><img src="app/img/grill.jpg"/></section><section><h4>Les grilles du <strong>New York Times</strong></h4><img src="app/img/grid.png"/></section><section><h3>Via un framework CSS</h3><pre><code class="html">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;span9&quot;&gt;
+    Level 1 column
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;span6&quot;&gt;Level 2&lt;/div&gt;
+      &lt;div class=&quot;span2 offset1&quot;&gt;Level 2&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></section><section><h3>Via Susy, un plugin Sass</h3><h5>Configuration rapide</h5><pre><code class="sass">@import "susy";
+
+// Number of columns
+$total-columns: 5;
+
+// Width of each column
+$column-width : 4em;
+
+// Space between columns
+$gutter-width : 1em;
+
+// Layout sizes
+$tablet: 8;
+$computer: 55em 12;
+</code></pre></section><section><div class="row-fluid"><div class="span6"><pre><code class="sass">@include at-breakpoint($computer) {
+  body .container {
+    #controls {
+      #title {
+        @include span-columns(5);
+      }
+      #buttons {
+        @include span-columns(5 omega);
+      }
+    }
+    table {
+      @include prefix(1);
+      @include suffix(1);
+    }
+  }
+}
+
+@include at-breakpoint($tablet) {
+  body .container {
+    @include span-columns(3);
+  }
+}</code></pre></div><div class="span6"><pre><code class="sass">@media (min-width: 55em) {
+  body .container #controls #title {
+    width: 40.67797%;
+    float: left;
+    margin-right: 1.69492%;
+  }
+  body .container #controls #buttons {
+    width: 40.67797%;
+    float: right;
+    margin-right: 0;
+  }
+  body .container table {
+    padding-left: 8.47458%;
+    padding-right: 8.47458%;
+  }
+}
+
+@media (min-width: 39em) {
+  body .container #header span {
+    display: inline;
+  }
+}</code></pre></div></div></section></section><section><section><h2>L'OOCSS</h2></section><section id="oocss"><h3>Introduction</h3><p data-markdown>L'OOCSS (**Object-Oriented CSS**) est une méthodologie CSS répandue consistant
+à approcher l'intégration d'un site en **modules** – repérer les élements visuels redondants au sein
+d'un design et les abstraire en des _morceaux_ de design réutilisables et combinables.
+Le site _Github_ propose un bon exemple d'OOCSS dans son styleguide, où l'on peut consulter l'ensemble
+des modules utilisés sur le site.</p><img src="app/img/github.png"/></section><section><h3>Exemple concret</h3><p>L'exemple le plus facile à donner en parlant d'OOCSS est le cas basique d'un bouton.</p><div class="row-fluid"><pre class="span6"><code class="sass">.button {
+  name: Benjamin;
+  color: grey;
+  background: white;
+}</code></pre><div class="span6"><p style="font-size:3rem;padding:.25rem 1rem " class="btn">Button</p></div></div><p data-markdown>Nous avons ici un module basique de bouton réutilisé partout sur le site. Si le style du bouton
+change, il changera uniformément sur l'ensemble des pages.
+</p></section><section><h3>Exemple concret</h3><p>Les modules ont ensuite des variantes, et/ou des élements contenus à
+l'intérieur d'eux. Un bouton pourra par exemple être rouge pour indiquer
+une action dangereuse, ou contenir une îcone.</p><div class="row-fluid"><div class="span6"><pre><code class="sass">.button.button-danger {
+  backgroud: red;
+}</code></pre><pre><code class="sass">.button .icon {
+  margin-right: .25rem;
+}</code></pre></div><div class="span6"><p style="font-size:3rem;padding:.25rem 1rem;color:white" class="btn-block btn btn-danger">Button</p><p style="font-size:3rem;padding:.25rem 1rem " class="btn-block btn"><i style="font-size: 3em" class="icon-home"></i>Button</p></div></div></section><section><h3>Conventions de nommage</h3><p data-markdown>Dans de nombreuses implémentations de l'OOCSS, un manque de conventions de nommage
+peut rendre très vite confus un ensemble de modules. Il existe heureusement des
+conventions pour faciliter cela; la plus connue étant la norme **BEM** pour _Block, Element, Modifier_.</p><div class="row-fluid"><div class="span4"><h5>CSS classique</h5><pre><code class="sass">a.button {
+  background: white;
+  color: black;
+}
+
+a.button.danger {
+  backgroud: red;
+}
+
+a.button.danger i {
+  margin-right: .25rem;
+}</code></pre></div><div class="span4"><h5>OOCSS classique</h5><pre><code class="sass">.button {
+  background: white;
+  color: black;
+}
+
+.button.button-danger {
+  backgroud: red;
+}
+
+.button .icon {
+  margin-right: .25rem;
+}</code></pre></div><div class="span4"><h5>BEM</h5><pre><code class="sass">.button {
+  background: white;
+  color: black;
+}
+
+.button--danger {
+  backgroud: red;
+}
+
+.button__icon {
+  margin-right: .25rem;
+}
+</code></pre></div></div></section><section><h3>Principe</h3><p>Le but de la norme BEM est de découpler présentation et structure.
+Dans de nombreuses intégrations CSS, on trouve des noms d'élements et/ou
+des élements enfants verrouillés à cause de la CSS :</p><pre><code class="sass">div.user-infos {
+  figure.large {
+    // The User avatar
+  }
+}</code></pre><p data-markdown>Ce style de code empêche, d'une, d'utiliser un autre élement que `div`
+pour afficher les infos de l'utilisateur, et de deux, d'utiliser les styles
+de son avatar ailleurs que dans ses infos.
+</p></section><section><h3>Les séparateurs</h3><p data-markdown>BEM utilise alors deux séparateurs : `--` et `__`. Cela permet non seulement
+de donner des noms plus complets à une classe mais aussi de discerner directement
+quel partie d'un module elle représente.</p><div class="row-fluid"><div class="span4"><h5>CSS classique</h5><pre><code class="sass">div.person {}
+div.person aside {}
+div.female {}
+div.female aside.hand {}
+div.person aside.hand.left</code></pre></div><div class="span4"><h5>OOCSS classique</h5><pre><code class="sass">.person {}
+.hand {}
+.female {}
+.female-hand {}
+.left-hand {}</code></pre></div><div class="span4"><h5>BEM</h5><pre><code class="sass">.person {}
+.person__hand {}
+.person--female {}
+.person--female__hand {}
+.person__hand--left {}</code></pre></div></div></section></section></div></div><script src="components/reveal.js/lib/js/head.min.js"></script><script src="components/reveal.js/js/reveal.js"></script><script src="app/js/main.js"></script></body></html>
