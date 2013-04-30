@@ -2,7 +2,10 @@
 </li><li class="fragment">Est le plus lent à évoluer du fait de mésententes entre les différents
 navigateurs
 </li><li class="fragment">Est un langage purement déclaratif (sur un seul niveau)
-</li></ul></section><section><blockquote>Tous les ajouts de ces dernières années au CSS se résument à des ajouts
+</li></ul></section><section><p data-markdown>Le CSS a initialement été conçu pour séparer contenu et présentation dans les
+pages web de l'époque.
+Similairement au PHP, il a été en
+</p></section><section><blockquote>Tous les ajouts de ces dernières années au CSS se résument à des ajouts
 en terme de possibilités <em>visuelles</em> (ombres, dégradés, filtres, etc.)
 alors qu'une grosse partie du problème se situe dans la syntaxe
 du langage et ses limitations</blockquote><p data-markdown>Similairement au PHP, le CSS crée à l'origine pour des styles basiques
@@ -11,7 +14,7 @@ est devenu bien trop simpliste comparé aux exigences et besoins des sites
 à un langage. Ils en corrigent les défauts et expriment le désir des développeurs face aux évolutions du langage.</p><p>Par exemple les variables, initialement introduites par les préprocesseurs CSS, sont maintenant
 considérées comme prochain ajout.</p><h3>CSS<br><small>Sass, Stylus, Less</small></h3><h3>Javascript<br><small>CoffeeScript, Dart, Typescript</small></h3><h3>HTML<br><small>Jade, HAML, Slim</small></h3></section><section class="text-left"><h2>Les préprocesseurs CSS</h2><div class="fragment"><h3>Less <small>Javascript</small></h3><p>Existe depuis 2009, écrit en Javascript, tente de conserver la philosophie déclarative du CSS (pas de conditions etc.)<br></p></div><div class="fragment"><h3>Stylus <small>Javascript</small></h3><p>Existe depuis 2011.<br>
 Relativement puissant, mais sacrifie lisibilité au profit de tours de magie syntaxiques</p></div><div class="fragment"><h3>Sass <small>Ruby</small></h3><p>Existe depuis 2006, le plus puissant des trois, écrit en Ruby.<br>
-Est un accompagné d'un framework extrêmement complet : <strong>Compass</strong>
+Est accompagné d'un framework extrêmement complet : <strong>Compass</strong>
 </p></div></section><section data-transition="zoom"><h2>Less</h2><pre><code class="sass">@base: #f938ab;
 
 .box-shadow(@style, @c) when (iscolor(@c)) {
@@ -473,7 +476,7 @@ pour afficher les infos de l'utilisateur, et de deux, d'utiliser les styles
 de son avatar ailleurs que dans ses infos.
 </p></section><section><h3>Les séparateurs</h3><p data-markdown>BEM utilise alors deux séparateurs : `--` et `__`. Cela permet non seulement
 de donner des noms plus complets à une classe mais aussi de discerner directement
-quel partie d'un module elle représente.</p><div class="row-fluid"><div class="span4"><h5>CSS classique</h5><pre><code class="sass">div.person {}
+quelle partie d'un module elle représente.</p><div class="row-fluid"><div class="span4"><h5>CSS classique</h5><pre><code class="sass">div.person {}
 div.person aside {}
 div.female {}
 div.female aside.hand {}
