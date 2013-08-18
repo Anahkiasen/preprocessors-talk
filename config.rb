@@ -1,7 +1,7 @@
 
 # Folders ---------------------------------------------------------- /
 
-project_path     = "./app/"
+project_path     = "app"
 css_dir          = "css"
 sass_dir         = "sass"
 fonts_dir        = "fonts"
@@ -14,7 +14,6 @@ output_style     = :nested
 preferred_syntax = :scss
 line_comments    = false
 relative_assets  = true
-# sass_options     = {:debug_info => true}
 
 # Extensions ------------------------------------------------------- /
 
