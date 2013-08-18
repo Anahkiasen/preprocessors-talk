@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Preprocessors</title><link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"><link rel="stylesheet" href="components/reveal.js/css/reveal.min.css"><link rel="stylesheet" href="components/highlightjs/styles/tomorrow-night-eighties.css"><link rel="stylesheet" href="components/reveal.js/css/theme/solarized.css"><link rel="stylesheet" href="app/css/main.css"></head><body><div class="reveal"><div class="slides container-fluid"><section data-transition="linear"><section><h1>Sass, Compass<br> et nouvelles<br> méthodologies CSS</h1></section><section><h3>Le CSS</h3><ul><li class="fragment">Est le plus récent de la trinité "HTML/CSS/JS"
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Preprocessors</title><link rel="stylesheet" href="bower_components/bootstrap/docs/assets/css/bootstrap.css"><link rel="stylesheet" href="bower_components/reveal.js/css/reveal.min.css"><link rel="stylesheet" href="bower_components/highlightjs/styles/tomorrow-night-eighties.css"><link rel="stylesheet" href="bower_components/reveal.js/css/theme/solarized.css"><link rel="stylesheet" href="app/css/main.css"></head><body><div class="reveal"><div class="slides container-fluid"><section data-transition="linear"><section><h1>Sass, Compass<br> et nouvelles<br> méthodologies CSS</h1></section><section><h3>Le CSS</h3><ul><li class="fragment">Est le plus récent de la trinité "HTML/CSS/JS"
 </li><li class="fragment">Est le plus lent à évoluer du fait de mésententes entre les différents
 navigateurs
 </li><li class="fragment">Est un langage purement déclaratif (sur un seul niveau)
@@ -35,10 +35,10 @@ Est accompagné d'un framework extrêmement complet : <strong>Compass</strong>
   -webkit-border-radius arguments
   -moz-border-radius arguments
   border-radius arguments
-  
+
 body
   font 12px Helvetica, Arial, sans-serif
-  
+
 a.button
   border-radius 5px
   </code></pre></section><section data-transition="zoom"><h2>Sass</h2><pre><code class="sass">@mixin table-base {
@@ -70,11 +70,11 @@ C'est un peu le _jQuery_ de Sass et CSS.
     font-weight: bold
   td, th
     padding: 2px
-    
+
 =left($dist)
   float: left
   margin-left: $dist
-  
+
 #data
   +left(10px)
   +table-base
@@ -125,7 +125,7 @@ C'est un peu le _jQuery_ de Sass et CSS.
    // ...
   }
  }
- 
+
  aside {
   // ...
  }
@@ -252,16 +252,16 @@ $width: 2rem;
  @include box-direction(reverse);
  height: 200px;
  width: 100%;
- 
+
  .content, .sidebar {
   padding: 20px;
  }
- 
+
  .content {
   @include box-flex(4);
   background-color: #c5c1b4;
  }
- 
+
  .sidebar {
   @include box-flex(1);
   background-color: #375f99;
@@ -488,4 +488,4 @@ div.person aside.hand.left</code></pre></div><div class="span4"><h5>OOCSS classi
 .person__hand {}
 .person--female {}
 .person--female__hand {}
-.person__hand--left {}</code></pre></div></div></section></section></div></div><script src="components/reveal.js/lib/js/head.min.js"></script><script src="components/reveal.js/js/reveal.js"></script><script src="app/js/main.js"></script></body></html>
+.person__hand--left {}</code></pre></div></div></section></section></div></div><script src="bower_components/reveal.js/lib/js/head.min.js"></script><script src="bower_components/reveal.js/js/reveal.js"></script><script src="app/js/main.js"></script></body></html>

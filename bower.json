@@ -1,6 +1,7 @@
 {
   "name": "Preprocessors slides",
   "dependencies": {
+  	"bootstrap": "~2",
     "reveal.js": "latest",
     "highlightjs": "latest",
     "jquery": "latest"
